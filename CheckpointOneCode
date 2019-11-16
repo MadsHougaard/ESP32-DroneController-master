@@ -1,3 +1,5 @@
+//Originally written in the Arduino standalone application
+
 const int PHOTORESISTOR =2; //defines pin 2 as the photoresistor pin
 
 
