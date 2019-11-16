@@ -1,0 +1,29 @@
+const int PHOTORESISTOR =2; //defines pin 2 as the photoresistor pin
+
+
+#include <FastLED.h>
+#define NUM_LEDS 7
+#define DATA_PIN 5
+
+CRGB leds[NUM_LEDS];
+
+
+void setup() {
+  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS); //sets up the LED strip
+   pinMode(PHOTORESISTOR, INPUT); //sets the photoresistor pin as an input pin
+   Serial.begin(9600);
+
+}
+
+void loop() {
+         Serial.println( analogRead(PHOTORESISTOR)); //prints the sensory values from the photoresistor
+         if (analogRead(PHOTORESISTOR) < 1500) {
+        for(int dot = 0; dot < NUM_LEDS; dot++) { //as long as the number of LEDs remaining is greater than zero, 1 will be adde
+            leds[dot] = CRGB::Blue; //blue LEDs
+            FastLED.show();
+            // clear this led for the next time around the loop
+            leds[dot] = CRGB::Black; //loops the LEDS between black and blue
+            delay(30);
+        }
+    }
+}
